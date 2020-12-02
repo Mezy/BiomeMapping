@@ -56,6 +56,8 @@ dependencies {
     shadow 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'
     compile project('abstraction')
     compile project('1_8_R3')
+    compile project('1_13_R2')
+    compile project('1_14_R1')
     compile project('1_15_R1')
     compile project('1_16_R1')
     compile project('1_16_R2')
