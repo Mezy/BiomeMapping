@@ -1,0 +1,92 @@
+# Directories #
+/build/
+/bin/
+target/
+ 
+# OS Files #
+.DS_Store
+ 
+*.class
+ 
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+ 
+######################
+# Windows
+######################
+ 
+# Windows image file caches
+Thumbs.db 
+ 
+# Folder config file
+Desktop.ini
+ 
+######################
+# OSX
+######################
+ 
+.DS_Store
+.svn
+ 
+# Thumbnails
+._*
+ 
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+ 
+ 
+######################
+# Eclipse
+######################
+ 
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+/src/main/resources/rebel.xml
+# External tool builders
+.externalToolBuilders/
+ 
+# Locally stored "Eclipse launch configurations"
+*.launch
+ 
+# CDT-specific
+.cproject
+ 
+# PDT-specific
+.buildpath
+todolist.txt
+/server/
+
+#Intellij
+.idea/*
+
+#Gradle
+/.gradle/
+.gradle/*
+!gradle-wrapper.jar
+
+# WorldEdit Builds
+Support-WorldEdit-7/build/tmp*
+Support-WorldEdit-6/build/tmp*
+# Project exclude paths
+/1_8_R3/build/
+/1_15_R1/build/
+/1_16_R1/build/
+/1_16_R2/build/
+/1_16_R3/build/
+/abstraction/build/

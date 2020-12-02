@@ -1,0 +1,71 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    group = pluginGroup
+    version = pluginVersion
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven {
+            // Spigot
+            url = 'https://hub.spigotmc.org/nexus/content/groups/public/'
+        }
+        maven {
+            // VaultAPI
+            url = 'https://jitpack.io'
+        }
+        maven {
+            // WorldEdit
+            url = 'http://maven.sk89q.com/repo/'
+        }
+        maven {
+            // ProtocolLib
+            url "http://repo.dmulloy2.net/nexus/repository/public/"
+        }
+        // PaperLib
+        maven {
+            url 'https://papermc.io/repo/repository/maven-public/'
+        }
+    }
+
+    processResources {
+        from(sourceSets.main.resources.srcDirs) {
+            filter ReplaceTokens, tokens: [version: version]
+        }
+    }
+}
+
+dependencies {
+    shadow 'com.google.code.findbugs:jsr305:3.0.2'
+    shadow 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'
+    compile project('abstraction')
+    compile project('1_8_R3')
+    compile project('1_15_R1')
+    compile project('1_16_R1')
+    compile project('1_16_R2')
+    compile project('1_16_R3')
+}
+
+shadowJar {
+    classifier = ''
+    configurations = [project.configurations.compile]
+    relocate 'io.papermc.lib', 'com.gmail.val59000mc.paperlib'
+}
+
+build.dependsOn(shadowJar)
