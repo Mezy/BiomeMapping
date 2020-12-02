@@ -80,5 +80,82 @@ public enum Biome {
     SOUL_SAND_VALLEY,
     CRIMSON_FOREST,
     WARPED_FOREST,
-    BASALT_DELTAS,
+    BASALT_DELTAS;
+
+    /**
+     * Used to check if the biome is a ocean type.
+     * @return Returns true when the biome is ocean
+     */
+    public boolean isOcean(){
+        switch (this){
+            case OCEAN:
+            case COLD_OCEAN:
+            case DEEP_COLD_OCEAN:
+            case DEEP_FROZEN_OCEAN:
+            case DEEP_LUKEWARM_OCEAN:
+            case DEEP_OCEAN:
+            case DEEP_WARM_OCEAN:
+            case FROZEN_OCEAN:
+            case LUKEWARM_OCEAN:
+            case WARM_OCEAN:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Used to check if the biome is a jungle type.
+     * @return Returns true when the biome is jungle
+     */
+    public boolean isJungle(){
+        switch (this){
+            case JUNGLE:
+            case JUNGLE_EDGE:
+            case JUNGLE_HILLS:
+            case BAMBOO_JUNGLE:
+            case BAMBOO_JUNGLE_HILLS:
+            case MODIFIED_JUNGLE:
+            case MODIFIED_JUNGLE_EDGE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Used to check if the biome is a nether type.
+     * @return Returns true when the biome is nether
+     */
+    public boolean isNether(){
+        switch (this){
+            case NETHER:
+            case NETHER_WASTES:
+            case SOUL_SAND_VALLEY:
+            case CRIMSON_FOREST:
+            case WARPED_FOREST:
+            case BASALT_DELTAS:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Used to check if the biome is a "the end" type.
+     * @return Returns true when the biome is "the end"
+     */
+    public boolean isTheEnd(){
+        switch (this){
+            case END_BARRENS:
+            case END_HIGHLANDS:
+            case END_MIDLANDS:
+            case THE_END:
+            case SMALL_END_ISLANDS:
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }
