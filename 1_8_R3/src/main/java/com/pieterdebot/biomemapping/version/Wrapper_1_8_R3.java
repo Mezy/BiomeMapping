@@ -9,6 +9,16 @@ import java.lang.reflect.Field;
 public class Wrapper_1_8_R3 implements VersionWrapper {
 
     @Override
+    public boolean biomeSupported(Biome biome) {
+        try {
+            getBiomeBase(biome);
+            return true;
+        }catch (ReflectiveOperationException ex){
+            return false;
+        }
+    }
+
+    @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
         Field biomesField = BiomeBase.class.getDeclaredField("biomes");
         biomesField.setAccessible(true);

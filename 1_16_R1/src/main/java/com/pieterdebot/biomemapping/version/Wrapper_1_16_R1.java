@@ -14,6 +14,11 @@ public class Wrapper_1_16_R1 implements VersionWrapper {
     private static final Biome[] HASH_SET_BIOMES = new Biome[]{Biome.OCEAN, Biome.PLAINS, Biome.DESERT, Biome.MOUNTAINS, Biome.FOREST, Biome.TAIGA, Biome.SWAMP, Biome.RIVER, Biome.FROZEN_RIVER, Biome.SNOWY_TUNDRA, Biome.SNOWY_MOUNTAINS, Biome.MUSHROOM_FIELDS, Biome.MUSHROOM_FIELD_SHORE, Biome.BEACH, Biome.DESERT_HILLS, Biome.WOODED_HILLS, Biome.TAIGA_HILLS, Biome.JUNGLE, Biome.JUNGLE_HILLS, Biome.JUNGLE_EDGE, Biome.DEEP_OCEAN, Biome.STONE_SHORE, Biome.SNOWY_BEACH, Biome.BIRCH_FOREST, Biome.BIRCH_FOREST_HILLS, Biome.DARK_FOREST, Biome.SNOWY_TAIGA, Biome.SNOWY_TAIGA_HILLS, Biome.GIANT_TREE_TAIGA, Biome.GIANT_TREE_TAIGA_HILLS, Biome.WOODED_MOUNTAINS, Biome.SAVANNA, Biome.SAVANNA_PLATEAU, Biome.BADLANDS, Biome.WOODED_BADLANDS_PLATEAU, Biome.BADLANDS_PLATEAU};
 
     @Override
+    public boolean biomeSupported(Biome biome) {
+        return getBiomeId(biome) != -1;
+    }
+
+    @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
         Method registerMethod = NMSUtils.getMethod(Biomes.class, "a");
 
@@ -370,7 +375,7 @@ public class Wrapper_1_16_R1 implements VersionWrapper {
             case BASALT_DELTAS:
                 return 173;
             default:
-                return getBiomeId(Biome.PLAINS);
+                return -1;
         }
     }
 

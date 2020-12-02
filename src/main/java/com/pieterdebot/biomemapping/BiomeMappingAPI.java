@@ -17,6 +17,23 @@ public class BiomeMappingAPI implements VersionWrapper{
         wrapper = getWrapper();
     }
 
+    /**
+     * Used to check if the biome is supported on the current server version.
+     * @param biome Biome that is being checked.
+     * @return Returns true when the biome is supported.
+     */
+    @Override
+    public boolean biomeSupported(Biome biome) {
+        return wrapper.biomeSupported(biome);
+    }
+
+    /**
+     * Replaces two biome types. (This only works for newly generated chunks)
+     * Make sure to always use {@link #biomeSupported(Biome)} first to make sure the biomes exist on the current version.
+     * @param oldBiome The biome type that gets removed.
+     * @param newBiome The biome type that gets added instead of the removed biome.
+     * @throws Exception Thrown when an error occurs during the changing of biomes.
+     */
     @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
         wrapper.replaceBiomes(oldBiome, newBiome);

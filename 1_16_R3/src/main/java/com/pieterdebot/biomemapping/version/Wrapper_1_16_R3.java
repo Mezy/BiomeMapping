@@ -2,14 +2,18 @@ package com.pieterdebot.biomemapping.version;
 
 import com.pieterdebot.biomemapping.Biome;
 import com.pieterdebot.biomemapping.utils.NMSUtils;
-import com.pieterdebot.biomemapping.version.VersionWrapper;
 import net.minecraft.server.v1_16_R3.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class Wrapper_1_16_R3 implements VersionWrapper {
-    
+
+    @Override
+    public boolean biomeSupported(Biome biome) {
+        return getBiomeId(biome) != -1;
+    }
+
     @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
         Field newBiomeField = getField(newBiome);
@@ -353,7 +357,7 @@ public class Wrapper_1_16_R3 implements VersionWrapper {
             case BASALT_DELTAS:
                 return 173;
             default:
-                return getBiomeId(Biome.PLAINS);
+                return -1;
         }
     }
 
