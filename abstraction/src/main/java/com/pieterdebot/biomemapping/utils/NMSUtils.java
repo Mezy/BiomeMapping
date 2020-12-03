@@ -2,7 +2,6 @@ package com.pieterdebot.biomemapping.utils;
 
 import org.bukkit.Bukkit;
 
-import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,7 +23,6 @@ public class NMSUtils {
         }
     }
 
-    @Nullable
     public static Object getHandle(Object craftObject){
         try{
             return getMethod(craftObject.getClass(), "getHandle").invoke(craftObject);
@@ -34,7 +32,6 @@ public class NMSUtils {
         }
     }
 
-    @Nullable
     public static Object getServer(Object o){
         try{
             return getMethod(o.getClass(), "getServer").invoke(o);
