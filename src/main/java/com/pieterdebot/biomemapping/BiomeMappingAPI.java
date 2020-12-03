@@ -78,8 +78,6 @@ public class BiomeMappingAPI implements VersionWrapper{
                 return new Wrapper_1_16_R2();
             case v1_16_R3:
                 return new Wrapper_1_16_R3();
-            default:
-                System.out.println("No supported wrapper found!");
         }
 
         throw new RuntimeException("Version " + version + " is not supported!");
