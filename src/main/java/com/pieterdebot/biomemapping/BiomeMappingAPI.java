@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 public class BiomeMappingAPI implements VersionWrapper{
 
     private static final String v1_8_R3 = "v1_8_R3";
+    private static final String v1_9_R1 = "v1_9_R1";
+    private static final String v1_9_R2 = "v1_9_R2";
     private static final String v1_10_R1 = "v1_10_R1";
     private static final String v1_11_R1 = "v1_11_R1";
     private static final String v1_12_R1 = "v1_12_R1";
@@ -52,6 +54,10 @@ public class BiomeMappingAPI implements VersionWrapper{
         switch (version){
             case v1_8_R3:
                 return new Wrapper_1_8_R3();
+            case v1_9_R1:
+                return new Wrapper_1_9_R1();
+            case v1_9_R2:
+                return new Wrapper_1_9_R2();
             case v1_10_R1:
                 return new Wrapper_1_10_R1();
             case v1_11_R1:
