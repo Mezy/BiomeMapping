@@ -37,7 +37,7 @@ public class Wrapper_1_8_R3 implements VersionWrapper {
     }
 
     private BiomeBase getBiomeBase(Biome biome) throws ReflectiveOperationException{
-        Field field = BiomeBase.class.getField(biome.name());
+        Field field = BiomeBase.class.getField(biome.getOldName());
         field.setAccessible(true);
         return (BiomeBase) field.get(null);
     }

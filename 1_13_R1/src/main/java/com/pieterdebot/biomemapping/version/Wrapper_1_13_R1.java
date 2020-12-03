@@ -15,7 +15,7 @@ public class Wrapper_1_13_R1 implements VersionWrapper {
 
     @Override
     public boolean biomeSupported(Biome biome) {
-        return getBiomeId(biome) != -1;
+        return getBiomeField(biome) != null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Wrapper_1_13_R1 implements VersionWrapper {
         NMSUtils.removeFinal(biomeBaseHashSet);
 
         // New registered BiomeBase
-        registerMethod.invoke(null, getBiomeId(oldBiome), oldBiome.name().toLowerCase(), getBiomeBase(newBiome));
+        registerMethod.invoke(null, oldBiome.getId(), oldBiome.name().toLowerCase(), getBiomeBase(newBiome));
 
         Set<Object> hashSet = (Set<Object>) biomeBaseHashSet.get(null);
         hashSet.clear();
@@ -39,7 +39,7 @@ public class Wrapper_1_13_R1 implements VersionWrapper {
     }
 
     private Field getField(Biome biome) throws ReflectiveOperationException{
-        Field field = Biomes.class.getField(biome.name());
+        Field field = Biomes.class.getField(getBiomeField(biome));
         field.setAccessible(true);
         NMSUtils.removeFinal(field);
         return field;
@@ -63,7 +63,7 @@ public class Wrapper_1_13_R1 implements VersionWrapper {
                 return getBiomeBaseInstance(BiomeSwamp.class);
             case RIVER:
                 return new BiomeRiver();
-            case NETHER:
+            case NETHER_WASTES:
                 return getBiomeBaseInstance(BiomeHell.class);
             case THE_END:
                 return new BiomeTheEnd();
@@ -198,164 +198,164 @@ public class Wrapper_1_13_R1 implements VersionWrapper {
         }
     }
 
-    private int getBiomeId(Biome biome) {
-        switch (biome){
-            case OCEAN:
-                return 0;
-            case PLAINS:
-                return 1;
-            case DESERT:
-                return 2;
-            case MOUNTAINS:
-                return 3;
-            case FOREST:
-                return 4;
-            case TAIGA:
-                return 5;
-            case SWAMP:
-                return 6;
-            case RIVER:
-                return 7;
-            case NETHER:
-                return 8;
-            case THE_END:
-                return 9;
-            case FROZEN_OCEAN:
-                return 10;
-            case FROZEN_RIVER:
-                return 11;
-            case SNOWY_TUNDRA:
-                return 12;
-            case SNOWY_MOUNTAINS:
-                return 13;
-            case MUSHROOM_FIELDS:
-                return 14;
-            case MUSHROOM_FIELD_SHORE:
-                return 15;
-            case BEACH:
-                return 16;
-            case DESERT_HILLS:
-                return 17;
-            case WOODED_HILLS:
-                return 18;
-            case TAIGA_HILLS:
-                return 19;
-            case MOUNTAIN_EDGE:
-                return 20;
-            case JUNGLE:
-                return 21;
-            case JUNGLE_HILLS:
-                return 22;
-            case JUNGLE_EDGE:
-                return 23;
-            case DEEP_OCEAN:
-                return 24;
-            case STONE_SHORE:
-                return 25;
-            case SNOWY_BEACH:
-                return 26;
-            case BIRCH_FOREST:
-                return 27;
-            case BIRCH_FOREST_HILLS:
-                return 28;
-            case DARK_FOREST:
-                return 29;
-            case SNOWY_TAIGA:
-                return 30;
-            case SNOWY_TAIGA_HILLS:
-                return 31;
-            case GIANT_TREE_TAIGA:
-                return 32;
-            case GIANT_TREE_TAIGA_HILLS:
-                return 33;
-            case WOODED_MOUNTAINS:
-                return 34;
-            case SAVANNA:
-                return 35;
-            case SAVANNA_PLATEAU:
-                return 36;
-            case BADLANDS:
-                return 37;
-            case WOODED_BADLANDS_PLATEAU:
-                return 38;
-            case BADLANDS_PLATEAU:
-                return 39;
-            case SMALL_END_ISLANDS:
-                return 40;
-            case END_MIDLANDS:
-                return 41;
-            case END_HIGHLANDS:
-                return 42;
-            case END_BARRENS:
-                return 43;
-            case WARM_OCEAN:
-                return 44;
-            case LUKEWARM_OCEAN:
-                return 45;
-            case COLD_OCEAN:
-                return 46;
-            case DEEP_WARM_OCEAN:
-                return 47;
-            case DEEP_LUKEWARM_OCEAN:
-                return 48;
-            case DEEP_COLD_OCEAN:
-                return 49;
-            case DEEP_FROZEN_OCEAN:
-                return 50;
-            case THE_VOID:
-                return 127;
-            case SUNFLOWER_PLAINS:
-                return 129;
-            case DESERT_LAKES:
-                return 129;
-            case GRAVELLY_MOUNTAINS:
-                return 131;
-            case FLOWER_FOREST:
-                return 132;
-            case TAIGA_MOUNTAINS:
-                return 133;
-            case SWAMP_HILLS:
-                return 134;
-            case ICE_SPIKES:
-                return 140;
-            case MODIFIED_JUNGLE:
-                return 149;
-            case MODIFIED_JUNGLE_EDGE:
-                return 151;
-            case TALL_BIRCH_FOREST:
-                return 155;
-            case TALL_BIRCH_HILLS:
-                return 156;
-            case DARK_FOREST_HILLS:
-                return 156;
-            case SNOWY_TAIGA_MOUNTAINS:
-                return 158;
-            case GIANT_SPRUCE_TAIGA:
-                return 160;
-            case GIANT_SPRUCE_TAIGA_HILLS:
-                return 161;
-            case MODIFIED_GRAVELLY_MOUNTAINS:
-                return 162;
-            case SHATTERED_SAVANNA:
-                return 163;
-            case SHATTERED_SAVANNA_PLATEAU:
-                return 164;
-            case ERODED_BADLANDS:
-                return 165;
-            case MODIFIED_WOODED_BADLANDS_PLATEAU:
-                return 166;
-            case MODIFIED_BADLANDS_PLATEAU:
-                return 167;
-            default:
-                return -1;
-        }
-    }
-
     private BiomeBase getBiomeBaseInstance(Class<? extends BiomeBase> biomeBaseClass) throws ReflectiveOperationException{
         Constructor<?> constructor = biomeBaseClass.getDeclaredConstructor();
         constructor.setAccessible(true);
 
         return (BiomeBase) constructor.newInstance();
+    }
+
+    private String getBiomeField(Biome biome) {
+        switch (biome) {
+            case OCEAN:
+                return "a"; // b == a
+            case PLAINS:
+                return "c";
+            case DESERT:
+                return "d";
+            case MOUNTAINS:
+                return "e";
+            case FOREST:
+                return "f";
+            case TAIGA:
+                return "g";
+            case SWAMP:
+                return "h";
+            case RIVER:
+                return "i";
+            case NETHER_WASTES:
+                return "j";
+            case THE_END:
+                return "k";
+            case FROZEN_OCEAN:
+                return "l";
+            case FROZEN_RIVER:
+                return "m";
+            case SNOWY_TUNDRA:
+                return "n";
+            case SNOWY_MOUNTAINS:
+                return "o";
+            case MUSHROOM_FIELDS:
+                return "p";
+            case MUSHROOM_FIELD_SHORE:
+                return "q";
+            case BEACH:
+                return "r";
+            case DESERT_HILLS:
+                return "s";
+            case WOODED_HILLS:
+                return "t";
+            case TAIGA_HILLS:
+                return "u";
+            case MOUNTAIN_EDGE:
+                return "v";
+            case JUNGLE:
+                return "w";
+            case JUNGLE_HILLS:
+                return "x";
+            case JUNGLE_EDGE:
+                return "y";
+            case DEEP_OCEAN:
+                return "z";
+            case STONE_SHORE:
+                return "A";
+            case SNOWY_BEACH:
+                return "B";
+            case BIRCH_FOREST:
+                return "C";
+            case BIRCH_FOREST_HILLS:
+                return "D";
+            case DARK_FOREST:
+                return "E";
+            case SNOWY_TAIGA:
+                return "F";
+            case SNOWY_TAIGA_HILLS:
+                return "G";
+            case GIANT_TREE_TAIGA:
+                return "H";
+            case GIANT_SPRUCE_TAIGA_HILLS:
+                return "I";
+            case WOODED_MOUNTAINS:
+                return "J";
+            case SAVANNA:
+                return "K";
+            case SAVANNA_PLATEAU:
+                return "L";
+            case BADLANDS:
+                return "M";
+            case WOODED_BADLANDS_PLATEAU:
+                return "N";
+            case BADLANDS_PLATEAU:
+                return "O";
+            case SMALL_END_ISLANDS:
+                return "P";
+            case END_MIDLANDS:
+                return "Q";
+            case END_HIGHLANDS:
+                return "R";
+            case END_BARRENS:
+                return "S";
+            case WARM_OCEAN:
+                return "T";
+            case LUKEWARM_OCEAN:
+                return "U";
+            case COLD_OCEAN:
+                return "V";
+            case DEEP_WARM_OCEAN:
+                return "W";
+            case DEEP_LUKEWARM_OCEAN:
+                return "X";
+            case DEEP_COLD_OCEAN:
+                return "Y";
+            case DEEP_FROZEN_OCEAN:
+                return "Z";
+            case THE_VOID:
+                return "aa";
+            case SUNFLOWER_PLAINS:
+                return "ab";
+            case DESERT_LAKES:
+                return "ac";
+            case GRAVELLY_MOUNTAINS:
+                return "ad";
+            case FLOWER_FOREST:
+                return "ae";
+            case TAIGA_MOUNTAINS:
+                return "af";
+            case SWAMP_HILLS:
+                return "ag";
+            case ICE_SPIKES:
+                return "ah";
+            case MODIFIED_JUNGLE:
+                return "ai";
+            case MODIFIED_JUNGLE_EDGE:
+                return "aj";
+            case TALL_BIRCH_FOREST:
+                return "ak";
+            case TALL_BIRCH_HILLS:
+                return "al";
+            case DARK_FOREST_HILLS:
+                return "am";
+            case SNOWY_TAIGA_MOUNTAINS:
+                return "an";
+            case GIANT_SPRUCE_TAIGA:
+                return "ao";
+            case GIANT_TREE_TAIGA_HILLS:
+                return "ap";
+            case MODIFIED_GRAVELLY_MOUNTAINS:
+                return "aq";
+            case SHATTERED_SAVANNA:
+                return "ar";
+            case SHATTERED_SAVANNA_PLATEAU:
+                return "as";
+            case ERODED_BADLANDS:
+                return "at";
+            case MODIFIED_WOODED_BADLANDS_PLATEAU:
+                return "au";
+            case MODIFIED_BADLANDS_PLATEAU:
+                return "av";
+            default:
+                return null;
+        }
     }
 
 }
