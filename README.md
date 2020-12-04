@@ -1,4 +1,4 @@
-# BiomeMapping ![Build Status](https://github.com/Mezy/UhcCore/workflows/Java%20CI%20with%20Gradle/badge.svg)
+# BiomeMapping ![Build Status](https://github.com/Mezy/BiomeMapping/workflows/Java%20CI%20with%20Gradle/badge.svg)
 Use this library to replace biomes on newly generated worlds.
 
 This project was made as there is no way to change biome generation through the Spigot / Bukkit API. It requires interaction with NMS and that is a pain in plugins where users have different versions of the server running.
@@ -17,7 +17,7 @@ on the issues tab.
 AnvilGUI requires the usage of Maven or a Maven compatible build system. 
 ```xml
 <dependency>
-    <groupId>com.github.Mezy.BiomeMapper</groupId>
+    <groupId>com.github.Mezy</groupId>
     <artifactId>BiomeMapping</artifactId>
     <version>master-SNAPSHOT</version>
 </dependency>
