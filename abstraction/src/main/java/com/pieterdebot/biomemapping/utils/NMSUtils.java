@@ -44,6 +44,11 @@ public class NMSUtils {
         return getMethod(c, name, -1);
     }
 
+    /**
+     * Removed the final modifier from a field
+     * @deprecated No longer supported in new Java versions!
+     */
+    @Deprecated
     public static void removeFinal(Field field) throws NoSuchFieldException, IllegalAccessException{
         // Remove final
         Field modifiersField = Field.class.getDeclaredField("modifiers");

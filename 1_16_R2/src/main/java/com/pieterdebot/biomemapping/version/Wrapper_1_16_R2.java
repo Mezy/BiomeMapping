@@ -21,18 +21,16 @@ public class Wrapper_1_16_R2 implements VersionWrapper {
 
     @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
-        Field newBiomeField = getField(newBiome);
-        Object resourceKey = newBiomeField.get(null);
+        Object newBiomeResourceKey = getResourceKey(newBiome);
 
         Method registerMethod = NMSUtils.getMethod(BiomeRegistry.class, "a", 3);
-        registerMethod.invoke(null, oldBiome.getId(), resourceKey, getBiomeBase(newBiome));
+        registerMethod.invoke(null, oldBiome.getId(), newBiomeResourceKey, getBiomeBase(newBiome));
     }
 
-    private Field getField(Biome biome) throws ReflectiveOperationException{
+    private Object getResourceKey(Biome biome) throws ReflectiveOperationException{
         Field field = Biomes.class.getField(biome.name());
         field.setAccessible(true);
-        NMSUtils.removeFinal(field);
-        return field;
+        return field.get(null);
     }
 
     private BiomeBase getBiomeBase(Biome biome) {
