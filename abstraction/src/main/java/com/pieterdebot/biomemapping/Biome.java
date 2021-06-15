@@ -79,7 +79,9 @@ public enum Biome {
     SOUL_SAND_VALLEY(170),
     CRIMSON_FOREST(171),
     WARPED_FOREST(172),
-    BASALT_DELTAS(173);
+    BASALT_DELTAS(173),
+    DRIPSTONE_CAVES(174),
+    LUSH_CAVES(175);
 
     private final int id;
     private final String oldName;
