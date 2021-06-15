@@ -3,10 +3,13 @@ import org.apache.tools.ant.filters.ReplaceTokens
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
     }
 }
 
@@ -35,26 +38,26 @@ allprojects {
 dependencies {
     shadow 'com.google.code.findbugs:jsr305:3.0.2'
     shadow 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'
-    compile project('abstraction')
-    compile project('1_8_R3')
-    compile project('1_9_R1')
-    compile project('1_9_R2')
-    compile project('1_10_R1')
-    compile project('1_11_R1')
-    compile project('1_12_R1')
-    compile project('1_13_R1')
-    compile project('1_13_R2')
-    compile project('1_14_R1')
-    compile project('1_15_R1')
-    compile project('1_16_R1')
-    compile project('1_16_R2')
-    compile project('1_16_R3')
+    implementation project('abstraction')
+    implementation project('1_8_R3')
+    implementation project('1_9_R1')
+    implementation project('1_9_R2')
+    implementation project('1_10_R1')
+    implementation project('1_11_R1')
+    implementation project('1_12_R1')
+    implementation project('1_13_R1')
+    implementation project('1_13_R2')
+    implementation project('1_14_R1')
+    implementation project('1_15_R1')
+    implementation project('1_16_R1')
+    implementation project('1_16_R2')
+    implementation project('1_16_R3')
+    //compile project('1_17_R1')
 }
 
 shadowJar {
     classifier = ''
-    configurations = [project.configurations.compile]
-    relocate 'io.papermc.lib', 'com.gmail.val59000mc.paperlib'
+    configurations = [project.configurations.compileClasspath]
 }
 
 build.dependsOn(shadowJar)
