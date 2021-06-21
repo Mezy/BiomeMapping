@@ -15,16 +15,11 @@ public class Wrapper_1_17_R1 implements VersionWrapper {
 
     @Override
     public boolean biomeSupported(Biome biome) {
-        try {
-            Biomes.class.getField(biome.name());
-            return true;
-        }catch (NoSuchFieldException ex){
-            return false;
-        }
+        return getBiomeField(biome) != null;
     }
 
     @Override
-    public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception{
+    public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception {
         Object newBiomeResourceKey = getResourceKey(newBiome);
 
         Method registerMethod = NMSUtils.getMethod(BiomeRegistry.class, "a", 3);
@@ -40,7 +35,7 @@ public class Wrapper_1_17_R1 implements VersionWrapper {
     private String getBiomeField(Biome biome) {
         switch (biome) {
             case OCEAN:
-                return "a"; // b == a
+                return "a";
             case PLAINS:
                 return "b";
             case DESERT:
