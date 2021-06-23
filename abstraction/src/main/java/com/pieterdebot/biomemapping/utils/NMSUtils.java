@@ -44,16 +44,14 @@ public class NMSUtils {
         return getMethod(c, name, -1);
     }
 
-    /**
-     * Removed the final modifier from a field
-     * @deprecated No longer supported in new Java versions!
-     */
-    @Deprecated
-    public static void removeFinal(Field field) throws NoSuchFieldException, IllegalAccessException{
-        // Remove final
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+    public static void removeFinal(Field field) throws IllegalAccessException {
+        try {
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        } catch (ReflectiveOperationException ex) {
+            throw new IllegalAccessException("Modifying of field modifiers is not supported on your version of Java!");
+        }
     }
 
     public static Method getMethod(Class<?> c, String name, int args) throws ReflectiveOperationException{
