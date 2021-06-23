@@ -1,9 +1,9 @@
 package com.pieterdebot.biomemapping.version;
 
 import com.pieterdebot.biomemapping.Biome;
-import com.pieterdebot.biomemapping.utils.NMSUtils;
 import net.minecraft.server.v1_9_R2.BiomeBase;
 import net.minecraft.server.v1_9_R2.Biomes;
+import net.minecraft.server.v1_9_R2.MinecraftKey;
 
 import java.lang.reflect.Field;
 
@@ -16,14 +16,9 @@ public class Wrapper_1_9_R2 implements VersionWrapper {
 
     @Override
     public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception {
-        Field oldBiomeField = Biomes.class.getField(getBiomeField(oldBiome));
         Field newBiomeField = Biomes.class.getField(getBiomeField(newBiome));
-
-        NMSUtils.removeFinal(oldBiomeField);
-
         BiomeBase newBiomeBase = (BiomeBase) newBiomeField.get(null);
-
-        oldBiomeField.set(null, newBiomeBase);
+        BiomeBase.REGISTRY_ID.a(oldBiome.getId(), new MinecraftKey(newBiome.name().toLowerCase()), newBiomeBase);
     }
 
     private String getBiomeField(Biome biome) {
