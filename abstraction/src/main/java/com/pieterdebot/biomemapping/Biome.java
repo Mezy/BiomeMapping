@@ -81,7 +81,13 @@ public enum Biome {
     WARPED_FOREST(172),
     BASALT_DELTAS(173),
     DRIPSTONE_CAVES(174),
-    LUSH_CAVES(175);
+    LUSH_CAVES(175),
+    MEADOW,
+    GROVE,
+    SNOWY_SLOPES,
+    FROZEN_PEAKS,
+    JAGGED_PEAKS,
+    STORY_PEAKS;
 
     private final int id;
     private final String oldName;
@@ -94,6 +100,10 @@ public enum Biome {
     Biome(int id){
         this.id = id;
         oldName = name();
+    }
+
+    Biome(){
+        this(-1);
     }
 
     public int getId() {
