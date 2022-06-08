@@ -14,7 +14,7 @@ on the issues tab.
 
 ### As a dependency
 
-AnvilGUI requires the usage of Maven or a Maven compatible build system. 
+BiomeMapping requires the usage of Maven or a Maven compatible build system. 
 ```xml
 <dependency>
     <groupId>com.github.Mezy</groupId>
