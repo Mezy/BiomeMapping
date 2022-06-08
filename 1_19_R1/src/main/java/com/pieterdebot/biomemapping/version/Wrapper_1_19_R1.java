@@ -1,16 +1,13 @@
 package com.pieterdebot.biomemapping.version;
 
 import com.pieterdebot.biomemapping.Biome;
-import com.pieterdebot.biomemapping.utils.NMSUtils;
-import net.minecraft.data.worldgen.biome.BiomeRegistry;
+import net.minecraft.data.RegistryGeneration;
 import net.minecraft.data.worldgen.biome.EndBiomes;
 import net.minecraft.data.worldgen.biome.NetherBiomes;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.BiomeBase;
 import net.minecraft.world.level.biome.Biomes;
-
-import java.lang.reflect.Method;
 
 public class Wrapper_1_19_R1 implements VersionWrapper {
 
@@ -20,10 +17,9 @@ public class Wrapper_1_19_R1 implements VersionWrapper {
     }
 
     @Override
-    public void replaceBiomes(Biome oldBiome, Biome newBiome) throws Exception {
+    public void replaceBiomes(Biome oldBiome, Biome newBiome) {
         ResourceKey<BiomeBase> newBiomeResourceKey = getResourceKey(newBiome);
-        Method registerMethod = NMSUtils.getMethod(BiomeRegistry.class, "a", 2);
-        registerMethod.invoke(null, newBiomeResourceKey, getBiomeBase(newBiome));
+        RegistryGeneration.a(RegistryGeneration.j, newBiomeResourceKey, getBiomeBase(newBiome));
     }
 
     private ResourceKey<BiomeBase> getResourceKey(Biome biome) {

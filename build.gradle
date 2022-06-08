@@ -2,7 +2,6 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
     repositories {
-        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -61,7 +60,7 @@ dependencies {
 }
 
 shadowJar {
-    classifier = ''
+    archiveClassifier.set('')
     configurations = [project.configurations.compileClasspath]
     dependencies {
         exclude(dependency('com.google.code.findbugs:jsr305:3.0.2'))
