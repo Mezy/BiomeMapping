@@ -87,7 +87,9 @@ public enum Biome {
     SNOWY_SLOPES,
     FROZEN_PEAKS,
     JAGGED_PEAKS,
-    STORY_PEAKS;
+    STORY_PEAKS,
+    MANGROVE_SWAMP,
+    ANCIENT_CITIES;
 
     private final int id;
     private final String oldName;

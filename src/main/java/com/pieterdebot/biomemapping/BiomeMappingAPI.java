@@ -20,6 +20,8 @@ public class BiomeMappingAPI implements VersionWrapper{
     private static final String v1_16_R3 = "v1_16_R3";
     private static final String v1_17_R1 = "v1_17_R1";
     private static final String v1_18_R1 = "v1_18_R1";
+    private static final String v1_18_R2 = "v1_18_R2";
+    private static final String v1_19_R1 = "v1_19_R1";
 
     private final VersionWrapper wrapper;
 
@@ -84,6 +86,10 @@ public class BiomeMappingAPI implements VersionWrapper{
                 return new Wrapper_1_17_R1();
             case v1_18_R1:
                 return new Wrapper_1_18_R1();
+            case v1_18_R2:
+                return new Wrapper_1_18_R2();
+            case v1_19_R1:
+                return new Wrapper_1_19_R1();
         }
 
         throw new RuntimeException("Version " + version + " is not supported!");

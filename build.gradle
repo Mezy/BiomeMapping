@@ -26,6 +26,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {url 'https://repo.codemc.org/repository/nms/'}
     }
 
@@ -55,6 +56,8 @@ dependencies {
     implementation project('1_16_R3')
     implementation project('1_17_R1')
     implementation project('1_18_R1')
+    implementation project('1_18_R2')
+    implementation project('1_19_R1')
 }
 
 shadowJar {
