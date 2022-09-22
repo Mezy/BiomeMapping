@@ -82,14 +82,14 @@ public enum Biome {
     BASALT_DELTAS(173),
     DRIPSTONE_CAVES(174),
     LUSH_CAVES(175),
-    MEADOW,
-    GROVE,
-    SNOWY_SLOPES,
-    FROZEN_PEAKS,
-    JAGGED_PEAKS,
-    STORY_PEAKS,
-    MANGROVE_SWAMP,
-    ANCIENT_CITIES;
+    MEADOW(176),
+    GROVE(177),
+    SNOWY_SLOPES(178),
+    FROZEN_PEAKS(179),
+    JAGGED_PEAKS(180),
+    STORY_PEAKS(181),
+    MANGROVE_SWAMP(182),
+    ANCIENT_CITIES(183);
 
     private final int id;
     private final String oldName;

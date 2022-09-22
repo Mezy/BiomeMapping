@@ -34,6 +34,19 @@ allprojects {
             filter ReplaceTokens, tokens: [version: version]
         }
     }
+
+
+
+    publishing {
+        publications {
+
+            shadow(MavenPublication) { publication ->
+                project.shadow.component(publication)
+            }
+        }
+    }
+
+
 }
 
 dependencies {
